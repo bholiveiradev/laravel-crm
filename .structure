@@ -1,0 +1,99 @@
+=============================================================================
+users
+=============================================================================
+-- id - int
+-- name - varchar
+-- celphone - varchar (NULL)
+-- email - varchar
+-- password - varchar
+-- is_admin - boolean // 0 - não (default); 1 - sim
+-- is_super - boolean // 0 - não (default); 1 - sim
+
+=============================================================================
+sources
+=============================================================================
+-- id - int
+-- title - varchar
+
+=============================================================================
+statuses
+=============================================================================
+-- id - int
+-- title - varchar
+-- type - tinyint // 0 - leads; 1 - customers
+-- class - varchar // success, danger, info
+
+=============================================================================
+branches
+=============================================================================
+-- id - int
+-- document - varchar
+-- name - varchar
+-- alias - varchar
+-- phone - varchar
+-- celphone - varchar (NULL)
+-- email - varchar
+-- site - varchar
+-- zipcode - varchar (NULL)
+-- address - varchar
+-- number - varchar
+-- district - varchar (NULL)
+-- complement - varchar (NULL)
+-- city - varchar
+-- state - varchar(2)
+-- active - boolean // 0 - inativo; 1 - ativo (default)
+
+=============================================================================
+leads
+=============================================================================
+-- id - int
+-- source_id - int fk: sources.id
+-- branch_id - int fk: branches.id
+-- status_id - int fk: statuses.id
+-- is_customer - boolean //0 - Não; 1 - Sim
+-- document - varchar
+-- name - varchar
+-- alias - varchar
+-- phone - varchar (NULL)
+-- celphone - varchar (NULL)
+-- email - varchar
+-- site - varchar
+-- zipcode - varchar (NULL)
+-- address - varchar
+-- number - varchar (NULL)
+-- district - varchar (NULL)
+-- complement - varchar (NULL)
+-- city - varchar
+-- state - varchar(2)
+-- comments - text (NULL)
+
+=============================================================================
+contacts
+=============================================================================
+-- id - int
+-- lead_id - int fk:leads.id
+-- datetime - datetime
+-- comments - text
+
+=============================================================================
+employees
+=============================================================================
+-- id - int
+-- user_id - int fk: users.id
+-- branch_id - int fk: branches.id (NULL)
+
+=============================================================================
+appointments
+=============================================================================
+-- id - int
+-- lead_id - int fk: leads.id
+-- employee_id - int fk: employees.id
+-- datetime - datetime
+-- status - tinyint // 0 - marcado (default); 1 - concluído; 2 - cancelado
+-- comments - text
+
+=============================================================================
+customers
+=============================================================================
+-- id - int
+-- lead_id - int fk: leads.id

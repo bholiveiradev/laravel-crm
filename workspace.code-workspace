@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "D:\\projetos\\admin-master"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "admin-master"
+	}
+}
