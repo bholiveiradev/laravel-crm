@@ -8,6 +8,13 @@ use App\Http\Requests\BranchRequest;
 
 class BranchController extends Controller
 {
+    private $branch;
+
+    public function __construct(Branch $branch)
+    {
+        $this->branch = $branch;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +22,12 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $title = 'Filiais';
-        $branches = Branch::all();
+        $branches = $this->branch->all();
 
-        return view('painel.branches.index', compact('title', 'branches'));
+        return view('painel.branches.index', [
+            'title'    => 'Filiais',
+            'branches' => $branches
+        ]);
     }
 
     /**
@@ -30,7 +39,9 @@ class BranchController extends Controller
     public function store(BranchRequest $request)
     {
         try {
-            $branch = Branch::create($request->all());
+            $branch = $this->branch
+                ->create($request->all());
+
             return response()->json($branch);
         } catch (\Exception $e) {
 
@@ -46,7 +57,7 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        $branches = Branch::find($id);
+        $branches = $this->branch->find($id);
         return response()->json($branches);
     }
 
@@ -60,8 +71,9 @@ class BranchController extends Controller
     public function update(BranchRequest $request, $id)
     {
         try {
-            $branch = Branch::find($id);
-            $branch->update($request->all());
+            $branch = $this->branch
+                ->find($id)
+                ->update($request->all());
 
             return response()->json($branch);
         } catch (\Exception $e) {
@@ -79,8 +91,9 @@ class BranchController extends Controller
     public function destroy($id)
     {
         try {
-            $branch = Branch::find($id);
-            $branch->delete();
+            $branch = $this->branch
+                ->find($id)
+                ->delete();
 
             return response()->json($branch);
         } catch (\Exception $e) {

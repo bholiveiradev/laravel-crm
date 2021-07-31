@@ -7,24 +7,37 @@ use App\Models\Branch;
 use App\Models\Source;
 use App\Models\Status;
 use App\Http\Requests\LeadRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class LeadController extends Controller
 {
+    private $lead;
+
+    public function __construct(Lead $lead)
+    {
+        $this->lead = $lead;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Status $status, Branch $branch, Source $source)
     {
-        $title = 'Leads';
-        $leads = Lead::all();
-        $statuses = Status::where('type', 'lead')->get();
-        $branches = Branch::all();
-        $sources  = Source::all();
+        $leads    = $this->lead->all();
+        $statuses = $status->where(['type' => 'lead'])->get();
+        $branches = $branch->all();
+        $sources  = $source->all();
 
-        return view('painel.leads.index', compact('title', 'leads', 'statuses', 'branches', 'sources'));
+        return view('painel.leads.index', [
+            'title'    => 'Leads',
+            'leads'    => $leads,
+            'statuses' => $statuses,
+            'branches' => $branches,
+            'sources'  => $sources
+        ]);
     }
 
     /**
@@ -35,17 +48,18 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
+        DB::beginTransaction();
         try {
-
-            $lead = Lead::create($request->all());
-            $lead->source()->associate($request->source);
-            $lead->branch()->associate($request->branch);
-            $lead->status()->associate($request->status);
+            $lead = $this->lead->create($request->all());
+            $lead->source()->associate($request['source']);
+            $lead->branch()->associate($request['branch']);
+            $lead->status()->associate($request['status']);
             $lead->save();
 
+            DB::commit();
             return response()->json($lead);
         } catch (\Exception $e) {
-
+            DB::rollBack();
             return response()->json($e->getMessage());
         }
     }
@@ -58,10 +72,12 @@ class LeadController extends Controller
      */
     public function show($id)
     {
-        $title = 'Leads';
-        $lead = Lead::findOrFail($id);
+        $lead = $this->lead->findOrFail($id);
 
-        return view('painel.leads.show', compact('title', 'lead'));
+        return view('painel.leads.show', [
+            'title' => 'Leads',
+            'lead'  =>  $lead
+        ]);
     }
 
     /**
@@ -85,6 +101,7 @@ class LeadController extends Controller
      */
     public function update(LeadRequest $request, $id)
     {
+        DB::beginTransaction();
         try {
             $lead = Lead::findOrFail($id);
             $lead->update($request->all());
@@ -93,9 +110,10 @@ class LeadController extends Controller
             $lead->status()->associate($request->status);
             $lead->save();
 
+            DB::commit();
             return response()->json($lead);
         } catch (\Exception $e) {
-
+            DB::rollBack();
             return response()->json(getException($e));
         }
     }

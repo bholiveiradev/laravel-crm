@@ -57,10 +57,10 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->celphone }}</td>
-                                    <td>{{ $user->branch ? $user->branch->alias : '' }}</td>
+                                    <td>{{ $user['name'] }}</td>
+                                    <td>{{ $user['email'] }}</td>
+                                    <td>{{ $user['celphone'] }}</td>
+                                    <td>{{ $user->branch ? $user->branch['alias'] : '' }}</td>
                                     <td>
                                         <div class="table-actions">
                                             <a href="{{ route('painel.users.edit', $user) }}"

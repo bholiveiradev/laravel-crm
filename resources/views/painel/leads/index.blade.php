@@ -58,13 +58,13 @@
                         <tbody>
                             @foreach($leads as $lead)
                             <tr>
-                                <td>{{ $lead->name }}</td>
-                                <td>{{ $lead->alias }}</td>
-                                <td>{{ $lead->email }}</td>
-                                <td>{{ $lead->celphone }}</td>
+                                <td>{{ $lead['name'] }}</td>
+                                <td>{{ $lead['alias'] }}</td>
+                                <td>{{ $lead['email'] }}</td>
+                                <td>{{ $lead['celphone'] }}</td>
                                 <td>
-                                    <span class="badge badge-pill badge-{{ $lead->status->class }}">
-                                        {{ $lead->status->title }}
+                                    <span class="badge badge-pill badge-{{ $lead->status['class'] }}">
+                                        {{ $lead->status['title'] }}
                                     </span>
                                 </td>
                                 <td>

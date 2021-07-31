@@ -2,13 +2,29 @@
 
 namespace App\Http\Controllers\Painel;
 
-use App\Http\Controllers\Controller;
 use App\Models\Lead;
 use App\Models\Contact;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
+    private $contact;
+    private $lead;
+    private $user;
+
+    public function __construct(Contact $contact, Lead $lead)
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            return $next($request);
+        });
+
+        $this->contact = $contact;
+        $this->lead    = $lead;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,11 +32,14 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $title = 'Contatos';
-        $contacts = Contact::all();
-        $leads = Lead::doesntHave('customer')->get();
+        $contacts = $this->contact->all();
+        $leads    = $this->lead->all();
 
-        return view('painel.contacts.index', compact('title', 'contacts', 'leads'));
+        return view('painel.contacts.index', [
+            'title'    => 'Contatos',
+            'contacts' => $contacts,
+            'leads'    => $leads
+        ]);
     }
 
     /**
@@ -34,13 +53,13 @@ class ContactController extends Controller
         try {
 
             $data = [
-                'date' => $request->input('date'),
-                'time' => $request->input('time'),
-                'comments'  => $request->input('comments'),
-                'user_id'   => auth()->id()
+                'date' => $request['date'],
+                'time' => $request['time'],
+                'comments'  => $request['comments'],
+                'user_id'   => $this->user['id']
             ];
 
-            $lead = Lead::find($request->input('lead'));
+            $lead = $this->lead->find($request['lead']);
             $lead->contacts()->create($data);
 
             return response()->json($lead);
@@ -69,7 +88,7 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        $contact = Contact::findOrFail($id);
+        $contact = $this->contact->findOrFail($id);
         return response()->json($contact);
     }
 
@@ -85,14 +104,15 @@ class ContactController extends Controller
         try {
 
             $data = [
-                'date' => $request->input('date'),
-                'time' => $request->input('time'),
-                'comments'  => $request->input('comments'),
-                'user_id'   => auth()->id()
+                'date' => $request['date'],
+                'time' => $request['time'],
+                'comments'  => $request['comments'],
+                'user_id'   => $this->user['id']
             ];
 
-            $contact = Contact::findOrFail($id);
-            $contact->update($data);
+            $contact = $this->contact
+                ->findOrFail($id)
+                ->update($data);
 
             return response()->json($contact);
         } catch (\Exception $e) {
@@ -110,8 +130,9 @@ class ContactController extends Controller
     public function destroy($id)
     {
         try {
-            $contact = Contact::findOrFail($id);
-            $contact->delete();
+            $contact = $this->contact
+                ->findOrFail($id)
+                ->delete();
 
             return response()->json($contact);
         } catch (\Exception $e) {

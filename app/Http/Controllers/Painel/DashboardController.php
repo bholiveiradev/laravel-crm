@@ -14,8 +14,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $title = 'Dashboard';
-
-        return view('painel.dashboard.index', compact('title'));
+        return view('painel.dashboard.index', ['title' => 'Dashboard']);
     }
 }

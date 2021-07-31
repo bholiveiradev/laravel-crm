@@ -8,6 +8,13 @@ use App\Http\Requests\SourceRequest;
 
 class SourceController extends Controller
 {
+    private $source;
+
+    public function __construct(Source $source)
+    {
+        $this->source = $source;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +22,12 @@ class SourceController extends Controller
      */
     public function index()
     {
-        $title = 'Orgiens';
-        $sources = Source::all();
+        $sources = $this->source->all();
 
-        return view('painel.sources.index', compact('title', 'sources'));
+        return view('painel.sources.index', [
+            'title' => 'Origens',
+            'sources' => $sources
+        ]);
     }
 
     /**
@@ -30,7 +39,7 @@ class SourceController extends Controller
     public function store(SourceRequest $request)
     {
         try {
-            $source = Source::create($request->all());
+            $source = $this->source->create($request->all());
             return response()->json($source);
         } catch (\Exception $e) {
 
@@ -46,7 +55,7 @@ class SourceController extends Controller
      */
     public function edit($id)
     {
-        $source = Source::find($id);
+        $source = $this->source->find($id);
         return response()->json($source);
     }
 
@@ -60,8 +69,8 @@ class SourceController extends Controller
     public function update(SourceRequest $request, $id)
     {
         try {
-            $source = Source::find($id);
-            $source->update($request->all());
+            $source = $this->source->find($id)
+                ->update($request->all());
 
             return response()->json($source);
         } catch (\Exception $e) {
@@ -79,8 +88,8 @@ class SourceController extends Controller
     public function destroy($id)
     {
         try {
-            $source = Source::find($id);
-            $source->delete();
+            $source = $this->source->find($id)
+                ->delete();
 
             return response()->json($source);
         } catch (\Exception $e) {

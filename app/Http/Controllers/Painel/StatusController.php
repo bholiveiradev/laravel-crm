@@ -8,6 +8,12 @@ use App\Http\Requests\StatusRequest;
 
 class StatusController extends Controller
 {
+    private $status;
+
+    public function __construct(Status $status)
+    {
+        $this->status = $status;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +21,12 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $title = 'Status';
-        $statuses = Status::all();
+        $statuses = $this->status->all();
 
-        return view('painel.status.index', compact('title', 'statuses'));
+        return view('painel.status.index', [
+            'title' => 'Status',
+            'statuses' => $statuses
+        ]);
     }
 
     /**
@@ -30,7 +38,7 @@ class StatusController extends Controller
     public function store(StatusRequest $request)
     {
         try {
-            $status = Status::create($request->all());
+            $status = $this->status->create($request->all());
             return response()->json($status);
         } catch (\Exception $e) {
 
@@ -46,7 +54,7 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        $status = Status::find($id);
+        $status = $this->status->find($id);
         return response()->json($status);
     }
 
@@ -60,8 +68,8 @@ class StatusController extends Controller
     public function update(StatusRequest $request, $id)
     {
         try {
-            $status = Status::find($id);
-            $status->update($request->all());
+            $status = $this->status->find($id)
+                ->update($request->all());
 
             return response()->json($status);
         } catch (\Exception $e) {
@@ -79,8 +87,8 @@ class StatusController extends Controller
     public function destroy($id)
     {
         try {
-            $status = Status::find($id);
-            $status->delete();
+            $status = $this->status->find($id)
+                ->delete();
 
             return response()->json($status);
         } catch (\Exception $e) {

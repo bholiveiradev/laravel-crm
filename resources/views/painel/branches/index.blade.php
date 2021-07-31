@@ -58,13 +58,13 @@
                         <tbody>
                             @foreach($branches as $branch)
                             <tr>
-                                <td>{{ $branch->name }}</td>
-                                <td>{{ $branch->alias }}</td>
-                                <td>{{ $branch->email }}</td>
-                                <td>{{ $branch->phone }}</td>
+                                <td>{{ $branch['name']}}</td>
+                                <td>{{ $branch['alias'] }}</td>
+                                <td>{{ $branch['email'] }}</td>
+                                <td>{{ $branch['phone'] }}</td>
                                 <td>
-                                    <span class="badge badge-pill badge-{{ $branch->active ? 'success' : 'danger' }}">
-                                        {{ $branch->active ? 'Sim' : 'Não' }}
+                                    <span class="badge badge-pill badge-{{ $branch['active'] ? 'success' : 'danger' }}">
+                                        {{ $branch['active'] ? 'Sim' : 'Não' }}
                                     </span>
                                 </td>
                                 <td>

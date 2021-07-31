@@ -14,9 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $title = 'Clientes';
-
-        return view('painel.customers.index', compact('title'));
+        return view('painel.customers.index', ['title' => 'Clientes']);
     }
 
     /**

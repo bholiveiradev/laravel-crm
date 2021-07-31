@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset(mix('assets/css/theme.css')) }}">
-
     @yield('css')
 
     <style>

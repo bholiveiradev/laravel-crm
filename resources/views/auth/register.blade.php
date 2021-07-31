@@ -46,7 +46,7 @@
                     <div class="authentication-form mx-auto">
                         <div class="logo-centered ml-0 text-center w-100">
                             <!--<img src="{{ asset('assets/img/logo.png') }}" width="180" alt="">-->
-                            FAZER <strong>LOGIN</strong>
+                            FAZER UM NOVO <strong>CADASTRO</strong>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show" role="alertdialog">

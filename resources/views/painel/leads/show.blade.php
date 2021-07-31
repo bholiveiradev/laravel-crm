@@ -66,37 +66,37 @@
                             <div class="col-md-12">
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">CPF/CNPJ</dt>
-                                    <dd class="col-md-10">{{ $lead->document }}</dd>
+                                    <dd class="col-md-10">{{ $lead['document'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Nome</dt>
-                                    <dd class="col-md-10">{{ $lead->name }}</dd>
+                                    <dd class="col-md-10">{{ $lead['name'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Fantasia</dt>
-                                    <dd class="col-md-10">{{ $lead->alias }}</dd>
+                                    <dd class="col-md-10">{{ $lead['alias'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Telefone</dt>
-                                    <dd class="col-md-10">{{ $lead->phone }}</dd>
+                                    <dd class="col-md-10">{{ $lead['phone'] }}</dd>
                                 </dl>
                                 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Celular</dt>
-                                    <dd class="col-md-10">{{ $lead->celphone }}</dd>
+                                    <dd class="col-md-10">{{ $lead['celphone'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">E-mail</dt>
-                                    <dd class="col-md-10">{{ $lead->email }}</dd>
+                                    <dd class="col-md-10">{{ $lead['email'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Site</dt>
-                                    <dd class="col-md-10">{{ $lead->site }}</dd>
+                                    <dd class="col-md-10">{{ $lead['site'] }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -104,37 +104,37 @@
                             <div class="col-md-12">
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">CEP</dt>
-                                    <dd class="col-md-10">{{ $lead->zipcode }}</dd>
+                                    <dd class="col-md-10">{{ $lead['zipcode'] }}</dd>
                                 </dl>
                             
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Endereço</dt>
-                                    <dd class="col-md-10">{{ $lead->address }}</dd>
+                                    <dd class="col-md-10">{{ $lead['address'] }}</dd>
                                 </dl>
                             
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Número</dt>
-                                    <dd class="col-md-10">{{ $lead->number ?? 'S/N' }}</dd>
+                                    <dd class="col-md-10">{{ $lead['number'] ?? 'S/N' }}</dd>
                                 </dl>
                                 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Bairro</dt>
-                                    <dd class="col-md-10">{{ $lead->district }}</dd>
+                                    <dd class="col-md-10">{{ $lead['district'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Compl</dt>
-                                    <dd class="col-md-10">{{ $lead->complement }}</dd>
+                                    <dd class="col-md-10">{{ $lead['complement'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Cidade</dt>
-                                    <dd class="col-md-10">{{ $lead->city }}</dd>
+                                    <dd class="col-md-10">{{ $lead['city'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Estado</dt>
-                                    <dd class="col-md-10">{{ $lead->state }}</dd>
+                                    <dd class="col-md-10">{{ $lead['state'] }}</dd>
                                 </dl>
                             </div>
                         </div>
@@ -149,12 +149,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($lead->contacts as $contact)
+                                    @foreach($lead['contacts'] as $contact)
                                     <tr>
-                                        <td>{{ date('d/m/Y', strtotime($contact->date)) }}</td>
-                                        <td>{{ date('H:i', strtotime($contact->time)) }}</td>
-                                        <td>{{ $contact->user->name }}</td>
-                                        <td>{{ $contact->comments }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($contact['date'])) }}</td>
+                                        <td>{{ date('H:i', strtotime($contact['time'])) }}</td>
+                                        <td>{{ $contact->user['name'] }}</td>
+                                        <td>{{ $contact['comments'] }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -195,26 +195,26 @@
                             <div class="col-md-12">
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Origem</dt>
-                                    <dd class="col-md-10">{{ $lead->source->title }}</dd>
+                                    <dd class="col-md-10">{{ $lead->source['title'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Status</dt>
                                     <dd class="col-md-10">
-                                        <span class="badge badge-pill badge-{{ $lead->status->class }}">
-                                            {{ $lead->status->title }}
+                                        <span class="badge badge-pill badge-{{ $lead->status['class'] }}">
+                                            {{ $lead->status['title'] }}
                                         </span>
                                     </dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Filial</dt>
-                                    <dd class="col-md-10">{{ $lead->branch->alias }}</dd>
+                                    <dd class="col-md-10">{{ $lead->branch['alias'] }}</dd>
                                 </dl>
 
                                 <dl class="row border-bottom">
                                     <dt class="col-md-2 mb-2">Comentários</dt>
-                                    <dd class="col-md-10">{{ $lead->comments }}</dd>
+                                    <dd class="col-md-10">{{ $lead['comments'] }}</dd>
                                 </dl>
                             </div>
                         </div>

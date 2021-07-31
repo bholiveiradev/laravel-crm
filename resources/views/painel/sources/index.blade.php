@@ -54,7 +54,7 @@
                         <tbody>
                             @foreach ($sources as $source)
                                 <tr>
-                                    <td>{{ $source->title }}</td>
+                                    <td>{{ $source['title'] }}</td>
                                     <td>
                                         <div class="table-actions">
                                             <a href="{{ route('painel.sources.edit', $source) }}"

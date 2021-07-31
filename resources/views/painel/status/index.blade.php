@@ -55,8 +55,8 @@
                         <tbody>
                             @foreach ($statuses as $status)
                                 <tr>
-                                    <td>{{ $status->title }}</td>
-                                    <td>{{ __(ucfirst($status->type)) }}</td>
+                                    <td>{{ $status['title'] }}</td>
+                                    <td>{{ __(ucfirst($status['type'])) }}</td>
                                     <td>
                                         <div class="table-actions">
                                             <a href="{{ route('painel.status.edit', $status) }}"

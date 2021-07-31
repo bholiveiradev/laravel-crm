@@ -14,8 +14,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $title = 'Compromissos';
-        return view('painel.appointments.index', compact('title'));
+        return view('painel.appointments.index', ['title' => 'Compromissos']);
     }
 
     /**

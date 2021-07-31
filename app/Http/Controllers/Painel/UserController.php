@@ -5,23 +5,34 @@ namespace App\Http\Controllers\Painel;
 use App\Models\User;
 use App\Models\Branch;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Branch $branch)
     {
-        $title = 'Usuários';
-        $users = User::all();
-        $branches = Branch::all(['id', 'alias']);
+        $users = $this->user->all();
+        $branches = $branch->all(['id', 'alias']);
 
-        return view('painel.users.index', compact('title', 'users', 'branches'));
+        return view('painel.users.index', [
+            'title'    => 'Usuários',
+            'users'    => $users,
+            'branches' => $branches
+        ]);
     }
 
     /**
@@ -32,19 +43,23 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+
+        DB::beginTransaction();
         try {
-            $data = $request->all();
 
-            $data['password'] = Hash::make($request->password);
+            $user = $this->user
+                ->create($data);
 
-            $user = User::create($data);
             $user->branch()
                 ->associate($request->branch)
                 ->save();
 
+            DB::commit();
             return response()->json($user);
         } catch (\Exception $e) {
-
+            DB::rollBack();
             return response()->json(getException($e));
         }
     }
@@ -57,7 +72,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('branch')->find($id);
+        $user = $this->user
+            ->with('branch')
+            ->find($id);
+
         return response()->json($user);
     }
 
@@ -73,13 +91,14 @@ class UserController extends Controller
         try {
             $data = $request->all();
 
-            if ($request->password) {
+            if ($request->password !== null) {
                 $data['password'] = Hash::make($request->password);
             }
 
 
-            $user = User::find($id);
-            $user->update($data);
+            $user = $this->user->find($id)
+                ->update($data);
+
             $user->branch()
                 ->associate($request->branch)
                 ->save();
@@ -100,8 +119,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         try {
-            $user = User::find($id);
-            $user->delete();
+            $user = $this->user
+                ->find($id)
+                ->delete();
 
             return response()->json($user);
         } catch (\Exception $e) {

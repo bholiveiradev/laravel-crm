@@ -10,7 +10,21 @@ class Lead extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'document', 'name', 'alias', 'phone', 'celphone', 'email', 'site', 'zipcode', 'address', 'number', 'district', 'complement', 'city', 'state', 'comments'
+        'document',
+        'name',
+        'alias',
+        'phone',
+        'celphone',
+        'email',
+        'site',
+        'zipcode',
+        'address',
+        'number',
+        'district',
+        'complement',
+        'city',
+        'state',
+        'comments'
     ];
 
     public function source()
