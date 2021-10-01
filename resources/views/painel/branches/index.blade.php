@@ -56,28 +56,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($branches as $branch)
-                            <tr>
-                                <td>{{ $branch['name']}}</td>
-                                <td>{{ $branch['alias'] }}</td>
-                                <td>{{ $branch['email'] }}</td>
-                                <td>{{ $branch['phone'] }}</td>
-                                <td>
-                                    <span class="badge badge-pill badge-{{ $branch['active'] ? 'success' : 'danger' }}">
-                                        {{ $branch['active'] ? 'Sim' : 'Não' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="table-actions">
-                                        <a href="{{ route('painel.branches.edit', $branch) }}"
-                                            data-update-action="{{ route('painel.branches.update', $branch) }}"
-                                            class="btn-edit text-primary" data-toggle="tooltip" data-placement="top"
-                                            title="Editar filial"><i class="ik ik-edit-2"></i></a>
-                                        <a href="{{ route('painel.branches.destroy', $branch) }}" class="btn-remove text-danger" data-toggle="tooltip"
-                                            data-placement="top" title="Remover filial"><i class="ik ik-trash-2"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($branches as $branch)
+                                <tr>
+                                    <td>{{ $branch['name'] }}</td>
+                                    <td>{{ $branch['alias'] }}</td>
+                                    <td>{{ $branch['email'] }}</td>
+                                    <td>{{ $branch['phone'] }}</td>
+                                    <td>
+                                        <span
+                                            class="badge badge-pill badge-{{ $branch['active'] ? 'success' : 'danger' }}">
+                                            {{ $branch['active'] ? 'Sim' : 'Não' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="table-actions">
+                                            <a href="{{ route('painel.branches.edit', $branch) }}"
+                                                data-update-action="{{ route('painel.branches.update', $branch) }}"
+                                                class="btn-edit text-primary" data-toggle="tooltip" data-placement="top"
+                                                title="Editar filial"><i class="ik ik-edit-2"></i></a>
+                                            <a href="{{ route('painel.branches.destroy', $branch) }}"
+                                                class="btn-remove text-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Remover filial"><i class="ik ik-trash-2"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -103,19 +105,20 @@
                     success: function(result) {
                         $('#fullwindowModalLabel').text('Editar Filial');
 
-                        $.each(result, function (key, value) {
-                            $('[name='+ key +']').val(value).change();
+                        $.each(result, function(key, value) {
+                            $('[name=' + key + ']').val(value).change();
                         });
 
                         $('select[name=state]').val(result.state).change();
                         $('select[name=active]').val(result.active).change();
+
+                        $('#formBranch').attr('action', $(this).data('update-action'))
+                            .find('input[name=_method]').val('PUT');
+
+                        $('#fullwindowModal').modal('show');
                     }
                 });
 
-                $('#formBranch').attr('action', $(this).data('update-action'))
-                    .find('input[name=_method]').val('PUT');
-
-                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação
@@ -234,7 +237,7 @@
                 $('#formBranch').trigger('reset')
                     .attr('action', "{{ route('painel.branches.store') }}")
                     .find('.is-invalid').removeClass('is-invalid')
-                
+
                 $('input[name=_method]').val('POST');
 
                 $('select[name=state]').val(null).change();
@@ -243,6 +246,5 @@
                 $("#errors-container").alert('close');
             });
         });
-
     </script>
 @endsection

@@ -95,7 +95,6 @@ class UserController extends Controller
                 $data['password'] = Hash::make($request->password);
             }
 
-
             $user = $this->user->find($id)
                 ->update($data);
 

@@ -63,9 +63,9 @@
                                                 data-update-action="{{ route('painel.status.update', $status) }}"
                                                 class="btn-edit text-primary" data-toggle="tooltip" data-placement="top"
                                                 title="Editar status"><i class="ik ik-edit-2"></i></a>
-                                            <a href="{{ route('painel.status.destroy', $status) }}" class="btn-remove text-danger"
-                                                data-toggle="tooltip" data-placement="top" title="Remover status"><i
-                                                    class="ik ik-trash-2"></i></a>
+                                            <a href="{{ route('painel.status.destroy', $status) }}"
+                                                class="btn-remove text-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Remover status"><i class="ik ik-trash-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -97,13 +97,14 @@
                         $('input[name=title]').val(result.title);
                         $('select[name=type]').val(result.type).change();
                         $('select[name=class]').val(result.class).change();
+
+                        $('#formStatus').attr('action', $(this).data('update-action'))
+                            .find('input[name=_method]').val('PUT');
+
+                        $('#fullwindowModal').modal('show');
                     }
                 });
 
-                $('#formStatus').attr('action', $(this).data('update-action'))
-                    .find('input[name=_method]').val('PUT');
-
-                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação
@@ -224,13 +225,12 @@
                     .find('.is-invalid').removeClass('is-invalid');
 
                 $('input[name=_method]').val('POST');
-                
+
                 $('select[name=type]').val('lead').change();
                 $('select[name=class]').val('primary').change();
 
                 $("#errors-container").alert('close');
             });
         });
-
     </script>
 @endsection

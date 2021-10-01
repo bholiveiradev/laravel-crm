@@ -61,9 +61,9 @@
                                                 data-update-action="{{ route('painel.sources.update', $source) }}"
                                                 class="btn-edit text-primary" data-toggle="tooltip" data-placement="top"
                                                 title="Editar origem"><i class="ik ik-edit-2"></i></a>
-                                            <a href="{{ route('painel.sources.destroy', $source) }}" class="btn-remove text-danger"
-                                                data-toggle="tooltip" data-placement="top" title="Remover origem"><i
-                                                    class="ik ik-trash-2"></i></a>
+                                            <a href="{{ route('painel.sources.destroy', $source) }}"
+                                                class="btn-remove text-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Remover origem"><i class="ik ik-trash-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -92,13 +92,12 @@
                     success: function(result) {
                         $('#fullwindowModalLabel').text('Editar Origem');
                         $('input[name=title]').val(result.title);
+                        $('#formSource').attr('action', $(this).data('update-action'))
+                            .find('input[name=_method]').val('PUT');
+
+                        $('#fullwindowModal').modal('show');
                     }
                 });
-
-                $('#formSource').attr('action', $(this).data('update-action'))
-                    .find('input[name=_method]').val('PUT');
-
-                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação
@@ -224,6 +223,5 @@
                 $("#errors-container").alert('close');
             });
         });
-
     </script>
 @endsection

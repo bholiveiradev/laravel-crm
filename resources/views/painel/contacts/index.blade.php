@@ -108,13 +108,14 @@
                         });
 
                         $('select[name=lead]').val(result.lead_id).change();
-                    }
+                        
+                        $('#formContact').attr('action', $(this).data('update-action'))
+                            .find('input[name=_method]').val('PUT');
+
+                        $('#fullwindowModal').modal('show');
+                    },
                 });
 
-                $('#formContact').attr('action', $(this).data('update-action'))
-                    .find('input[name=_method]').val('PUT');
-
-                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação

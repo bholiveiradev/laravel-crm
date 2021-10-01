@@ -67,9 +67,9 @@
                                                 data-update-action="{{ route('painel.users.update', $user) }}"
                                                 class="btn-edit text-primary" data-toggle="tooltip" data-placement="top"
                                                 title="Editar usuário"><i class="ik ik-edit-2"></i></a>
-                                            <a href="{{ route('painel.users.destroy', $user) }}" class="btn-remove text-danger"
-                                                data-toggle="tooltip" data-placement="top" title="Remover usuário"><i
-                                                    class="ik ik-trash-2"></i></a>
+                                            <a href="{{ route('painel.users.destroy', $user) }}"
+                                                class="btn-remove text-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Remover usuário"><i class="ik ik-trash-2"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -103,13 +103,14 @@
                         });
 
                         $('select[name=branch]').val(result.branch.id).change();
+
+                        $('#formUser').attr('action', $(this).data('update-action'))
+                            .find('input[name=_method]').val('PUT');
+
+                        $('#fullwindowModal').modal('show');
                     }
                 });
 
-                $('#formUser').attr('action', $(this).data('update-action'))
-                    .find('input[name=_method]').val('PUT');
-
-                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação
@@ -238,6 +239,5 @@
                 $("#errors-container").alert('close');
             });
         });
-
     </script>
 @endsection

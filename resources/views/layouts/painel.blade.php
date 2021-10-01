@@ -189,10 +189,10 @@
                 <div class="sidebar-header">
                     <a class="header-brand" href="{{ route('painel.dashboard.index') }}">
                         <div class="logo-img">
-                            <img src="{{ asset('assets/img/logo-mobile.png') }}" class="header-brand-img" width="30"
-                                alt="Logo Mentora Soluções">
+                            <!--<img src="{{ asset('assets/img/logo-mobile.png') }}" class="header-brand-img" width="30"
+                                alt="Logo Mentora Soluções">-->
                             <span class="text text-uppercase">
-                                LOGOTIPO
+                                SysCRM
                             </span>
                         </div>
                     </a>

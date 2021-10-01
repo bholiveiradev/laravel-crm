@@ -31,7 +31,9 @@ class UserRequest extends FormRequest
             'email' => "required|email|max:191|unique:users,email," . $user,
             'password' => ($user ? 'nullable' : 'required') . '|string|min:8|max:191|confirmed',
             'password_confirmation' => $user ? 'nullable' : 'required',
-            'branch' => 'required'
+            'branch' => 'required',
+            'super' => 'boolean',
+            'admin' => 'boolean',
         ];
     }
 }
