@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        {{ isset($title) ? $title . ' - ' . config('app.name', 'Mentora CRM') : config('app.name', 'Mentora CRM') }}
+        {{ isset($title) ? $title . ' - ' . 'SYSCRM' : 'SYSCRM' }}
     </title>
 
     <meta name="description" content="">
