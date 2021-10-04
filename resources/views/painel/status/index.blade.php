@@ -97,13 +97,13 @@
                         $('input[name=title]').val(result.title);
                         $('select[name=type]').val(result.type).change();
                         $('select[name=class]').val(result.class).change();
-
-                        $('#formStatus').attr('action', $(this).data('update-action'))
-                            .find('input[name=_method]').val('PUT');
-
-                        $('#fullwindowModal').modal('show');
                     }
                 });
+
+                $('#formStatus').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+
+                $('#fullwindowModal').modal('show');
 
             });
 

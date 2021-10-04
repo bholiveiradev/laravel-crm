@@ -103,13 +103,13 @@
                         });
 
                         $('select[name=branch]').val(result.branch.id).change();
-
-                        $('#formUser').attr('action', $(this).data('update-action'))
-                            .find('input[name=_method]').val('PUT');
-
-                        $('#fullwindowModal').modal('show');
                     }
                 });
+
+                $('#formUser').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+
+                $('#fullwindowModal').modal('show');
 
             });
 

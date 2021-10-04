@@ -35,13 +35,7 @@ if (!function_exists('getException')) {
     function getException($exception)
     {
         if (env('APP_DEBUG') === true) {
-            return [
-                'exception' => [
-                    'code'      => $exception->getCode(),
-                    'message'   => $exception->getMessage(),
-                    'line'      => $exception->getLine()
-                ]
-            ];
+            return ['errors' => true, 'message' => $exception->getMessage()];
         }
 
         return ['errors' => true, 'message' => __('Request processing error')];

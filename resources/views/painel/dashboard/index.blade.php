@@ -1,5 +1,5 @@
 @extends('layouts.painel')
 
 @section('content')
-    DASHBOARD...
+    DASHBOARD
 @endsection

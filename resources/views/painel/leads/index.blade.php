@@ -116,13 +116,13 @@
                         $('select[name=source]').val(result.source_id).change();
                         $('select[name=status]').val(result.status_id).change();
                         $('select[name=branch]').val(result.branch_id).change();
-
-                        $('#formLead').attr('action', $(this).data('update-action'))
-                            .find('input[name=_method]').val('PUT');
-
-                        $('#fullwindowModal').modal('show');
                     }
                 });
+
+                $('#formLead').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+
+                $('#fullwindowModal').modal('show');
 
             });
 

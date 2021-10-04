@@ -51,7 +51,6 @@ class ContactController extends Controller
     public function store(ContactRequest $request)
     {
         try {
-
             $data = [
                 'date' => $request['date'],
                 'time' => $request['time'],
@@ -102,7 +101,6 @@ class ContactController extends Controller
     public function update(ContactRequest $request, $id)
     {
         try {
-
             $data = [
                 'date' => $request['date'],
                 'time' => $request['time'],

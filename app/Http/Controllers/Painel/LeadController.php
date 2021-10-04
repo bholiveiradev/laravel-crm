@@ -105,9 +105,9 @@ class LeadController extends Controller
         try {
             $lead = Lead::findOrFail($id);
             $lead->update($request->all());
-            $lead->source()->associate($request->source);
-            $lead->branch()->associate($request->branch);
-            $lead->status()->associate($request->status);
+            $lead->source()->associate($request['source']);
+            $lead->branch()->associate($request['branch']);
+            $lead->status()->associate($request['status']);
             $lead->save();
 
             DB::commit();
@@ -132,7 +132,6 @@ class LeadController extends Controller
 
             return response()->json($lead);
         } catch (\Exception $e) {
-
             return response()->json(getException($e));
         }
     }

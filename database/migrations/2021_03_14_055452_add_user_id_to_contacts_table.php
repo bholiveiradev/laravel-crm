@@ -14,7 +14,12 @@ class AddUserIdToContactsTable extends Migration
     public function up()
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('set null')->after('id');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null')
+                ->after('id');
         });
     }
 

@@ -36,8 +36,11 @@ class LeadRequest extends FormRequest
             'number'    => 'required|string|min:1|max:10',
             'district'  => 'required|string|max:191',
             'complement'    => 'nullable|string|max:191',
-            'city'  => 'required|string|max:191',
-            'state' => 'required|string|min:2|max:2'
+            'city'   => 'required|string|max:191',
+            'state'  => 'required|string|min:2|max:2',
+            'source' => 'required|exists:sources,id',
+            'branch' => 'required|exists:branches,id',
+            'status' => 'required|exists:statuses,id',
         ];
     }
 }

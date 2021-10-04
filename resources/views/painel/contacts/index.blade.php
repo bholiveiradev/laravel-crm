@@ -107,14 +107,14 @@
                             $('[name=' + key + ']').val(value).change();
                         });
 
-                        $('select[name=lead]').val(result.lead_id).change();
-                        
-                        $('#formContact').attr('action', $(this).data('update-action'))
-                            .find('input[name=_method]').val('PUT');
-
-                        $('#fullwindowModal').modal('show');
+                        $('select[name=lead]').val(result.lead_id).change();                        
                     },
                 });
+
+                $('#formContact').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+
+                $('#fullwindowModal').modal('show');
 
             });
 

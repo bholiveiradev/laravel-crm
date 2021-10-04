@@ -16,13 +16,13 @@ class ContactRequest extends FormRequest
         return true;
     }
 
-    public function all($keys = null)
+    /*public function all($keys = null)
     {
         $input = parent::all($keys);
-        $input['date'] = date('d/m/Y', strtotime($input['date']));
+        $input['date'] = \DateTime::createFromFormat('Y-m-d', $input['date'])->format('d/m/Y');
         $this->replace($input);
         return parent::all($keys);
-    }
+    }*/
 
     /**
      * Get the validation rules that apply to the request.
@@ -33,7 +33,7 @@ class ContactRequest extends FormRequest
     {
         return [
             'lead' => 'required',
-            'date' => 'required|date_format:d/m/Y|after_or_equal:' . date('d/m/Y'),
+            'date' => 'required|date',
             'time' => 'required',
             'comments' => 'required|string|min:10',
         ];

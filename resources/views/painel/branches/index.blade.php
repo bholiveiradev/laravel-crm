@@ -111,14 +111,13 @@
 
                         $('select[name=state]').val(result.state).change();
                         $('select[name=active]').val(result.active).change();
-
-                        $('#formBranch').attr('action', $(this).data('update-action'))
-                            .find('input[name=_method]').val('PUT');
-
-                        $('#fullwindowModal').modal('show');
                     }
                 });
 
+                $('#formBranch').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+                    
+                $('#fullwindowModal').modal('show');
             });
 
             // Remove os dados com confirmação

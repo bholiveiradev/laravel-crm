@@ -15,9 +15,14 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreignId('branch_id')
+                ->references('id')
+                ->on('branches')
+                ->onDelete('cascade');
         });
     }
 
