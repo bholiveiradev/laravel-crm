@@ -27,6 +27,9 @@ Route::group(['namespace' => 'Painel', 'middleware' => ['auth'], 'prefix' => 'pa
     Route::get('/leads/compromissos', 'AppointmentController@index')
         ->name('leads.appointments.index');
 
+    Route::post('leads/{id}/transform-customer', 'AppointmentController@transformCustomer')
+        ->name('leads.appointments.transformCustomer');
+
     Route::resource('clientes', 'CustomerController')
         ->except(['create'])
         ->names('customers');

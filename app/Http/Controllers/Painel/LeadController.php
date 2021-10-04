@@ -135,4 +135,12 @@ class LeadController extends Controller
             return response()->json(getException($e));
         }
     }
+
+    public function transformCustomer($id)
+    {
+        try {
+        } catch (\Exception $e) {
+            return response()->json(getException($e));
+        }
+    }
 }
