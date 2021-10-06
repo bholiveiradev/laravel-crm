@@ -1,13 +1,12 @@
 <div class="sidebar-content">
     <div class="nav-container">
         <nav id="main-menu-navigation" class="navigation-main">
-            <div
-                class="nav-item {{ request()->is('painel') || request()->is('painel/dashboard') ? 'active' : null }}">
+            <div class="nav-item {{ request()->is('painel') || request()->is('painel/dashboard') ? 'active' : null }}">
                 <a href="{{ route('painel.dashboard.index') }}">
                     <i class="ik ik-bar-chart-2"></i>
                     <span>Dashboard</span>
                 </a>
-            </div>
+            </div>            
             <div
                 class="nav-item has-sub {{ request()->is('painel/clientes') || request()->is('painel/curstomers/*') ? 'active open' : null }}">
                 <a href="javascript:void(0)">
@@ -54,7 +53,8 @@
                     <span>Usuários</span>
                 </a>
             </div>
-            <div class="nav-item has-sub
+            <div
+                class="nav-item has-sub
                     {{ request()->is('painel/origens') || request()->is('painel/origens/*') || request()->is('painel/status') || request()->is('painel/status/*') ? 'active open' : null }}
                 ">
                 <a href="javascript:void(0)">

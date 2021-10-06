@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.includes.development-feature')
 @endsection
 
 @section('content')
