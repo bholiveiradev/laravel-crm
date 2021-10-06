@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/assets/js')
     .js('resources/src/js/theme.js', 'public/assets/js')
+    .js('resources/src/js/scripts.js', 'public/assets/js')
     .sass('resources/sass/app.scss', 'public/assets/css')
     .styles('resources/dist/css/theme.css', 'public/assets/css/theme.css')
     .copyDirectory('resources/src/js/vendor/modernizr-2.8.3.min.js', 'public/assets/js/vendor/modernizr.js')
