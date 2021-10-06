@@ -94,12 +94,13 @@
                         $('input[name=title]').val(result.title);
                     }
                 });
+                
+                $('#formSource').attr('action', $(this).data('update-action'))
+                    .find('input[name=_method]').val('PUT');
+
+                $('#fullwindowModal').modal('show');
             });
             
-            $('#formSource').attr('action', $(this).data('update-action'))
-                .find('input[name=_method]').val('PUT');
-
-            $('#fullwindowModal').modal('show');
 
             // Remove os dados com confirmação
             $('.btn-remove').on('click', function() {

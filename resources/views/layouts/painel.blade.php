@@ -50,7 +50,7 @@
                         <i data-toggle="expanded" class="ik toggle-icon ik-toggle-right"></i>
                     </button>
                 </div>
-                @include('layouts.includes.sidebar')
+                @include('layouts.includes.menu-sidebar')
             </div>
             <div class="main-content">
                 <!-- Conteúdo -->
