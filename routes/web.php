@@ -58,4 +58,6 @@ Route::group(['namespace' => 'Painel', 'middleware' => ['auth'], 'prefix' => 'pa
         ->except(['create']);
 });
 
+Route::get('/', 'Web\WelcomeController@index');
+
 Auth::routes(['register' => false]);
