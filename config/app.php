@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Mentora CRM'),
+    'name' => env('APP_NAME', 'SYSCRM'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://crm.mentorasolucoes.com.br'),
+    'url' => env('APP_URL', 'https://syscrm.herokuapp.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
