@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        {{ isset($title) ? $title . ' - ' . 'SYSCRM' : 'SYSCRM' }}
+        {{ isset($title) ? $title . ' | ' . 'SYSCRM' : 'SYSCRM' }}
     </title>
 
     <meta name="description" content="">
